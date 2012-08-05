@@ -57,10 +57,10 @@ public class QueryGenerator {
 						new QueryFile(
 								"queries-bjq-fq.txt",
 								"q=text_all:(%s)"
-										+ "&fl=id,score&sort=score desc&fq={!join from=join_id to=id}acl:%s"),
+										+ "&fl=id,score&sort=score desc&fq={!parent which=kind:body}acl:%s"),
 
-						new QueryFile("queries-bjq.txt",
-								"q=text_all:(%s) AND _query_:\"{!join from=join_id to=id}acl:%s\""
+						new QueryFile("queries-bjq.txt", // AND _query_:\"{!parent which=kind:body}acl:%s\""
+								"q=text_all:(%s) AND _query_:\"{!parent which=kind:body}acl:%s\""
 										+ "&fl=id,score&sort=score desc"),
 						new QueryFile("queries-no-acls.txt",
 								"q=text_all:(%s)&fl=id,score&sort=score desc"));
