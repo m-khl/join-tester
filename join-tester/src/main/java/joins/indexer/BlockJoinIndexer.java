@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrServer;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.SolrInputField;
@@ -35,13 +34,12 @@ public class BlockJoinIndexer extends JoinIndexer {
 	}
 
 	@Override
-	protected void addDocs(ConcurrentUpdateSolrServer server,
-			List<SolrInputDocument> list) throws SolrServerException,
+	protected void addDocs(List<SolrInputDocument> list) throws SolrServerException,
 			IOException {
 		UpdateRequest req = new UpdateRequest();
 				req.add(list);
 				req.setParam("update.chain","flatten-chain");
 				req.setCommitWithin(-1);
-		req.process(server);
+		req.process(_server);
 	}
 }
